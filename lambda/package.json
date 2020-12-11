@@ -1,0 +1,26 @@
+{
+  "name": "hello-world",
+  "version": "1.1.0",
+  "description": "alexa utility for quickly building skills",
+  "main": "index.js",
+  "scripts": {
+    "buildmodel": "node build_interaction_model.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Amazon Alexa",
+  "license": "ISC",
+  "dependencies": {
+    "ask-sdk-controls": "^0.4.0",
+    "ask-sdk-core": "^2.10.1",
+    "ask-sdk-model": "^1.34.1",
+    "aws-sdk": "^2.326.0"
+  },
+  "devDependencies": {
+    "husky": "^4.3.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "cd `git rev-parse --show-toplevel`/lambda; npm run buildmodel; git add ../skill-package/interactionModels"
+    }
+  }
+}

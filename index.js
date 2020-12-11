@@ -10,9 +10,15 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = 'Welcome, you can say Hello or Help. Which would you like to try?';
+        const speakOutput =  "Welcome to Fizz Buzz. We’ll each take turns counting up from one. However, you must replace numbers divisible by 3 with the word fizz and you must replace numbers divisible by 5 with the word buzz. If a number is divisible by both 3 and 5, you should instead say “fizz buzz”. If you get one wrong, you lose.";
 
         return handlerInput.responseBuilder
+        .addElicitSlotDirective('count',
+        {
+            name: 'FizzIntent',
+            confirmationStatus: 'NONE',
+            slots: {}
+        })
             .speak(speakOutput)
             .reprompt(speakOutput)
             .getResponse();
