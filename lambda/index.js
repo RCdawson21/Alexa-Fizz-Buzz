@@ -196,16 +196,62 @@ const FizzIntent ={
     let isFizz = (targetNum + 1 )% 3 ;
     console.log(`isFizz:${targetNum+1} is current number and it is ${isFizz}`);
     let responseNum = 0;
-    let correctResponse = ''; 
-    if((targetNum + 1 )% 3 === 0){
+    let correctResponse = '';
+    let responseString ='';
+    if((targetNum + 2)  % 5  === 0 && (targetNum + 2) % 3 === 0){
+      responseString = 'Fizz Buzz';
+    } else if((targetNum + 2)  % 5 === 0){
+      responseString ='Buzz';
+    } else if((targetNum + 2)  % 3 === 0){
+     responseString = 'Fizz'
+    } else{
+     responseString = ((targetNum + 2) ).toString();
+   }
+
+    if((targetNum + 1) % 3 === 0 && (targetNum + 1) % 5 === 0){
+      correctResponse = 'fizz buzz';
+      if(guessNum ===  'fizz buzz'){
+        sessionAttributes.guessNumber = responseNum;
+        return handlerInput.responseBuilder
+        .speak(responseString)
+        .reprompt(responseString)
+        .getResponse();
+      }
+      sessionAttributes.gameState = 'ENDED';
+      attributesManager.setPersistentAttributes(sessionAttributes);
+      await attributesManager.savePersistentAttributes();
+      sessionAttributes.guessNumber = targetNum + 2; 
+      return handlerInput.responseBuilder
+      .speak(requestAttributes.t('EXIT_MESSAGE', correctResponse))
+      .reprompt(requestAttributes.t('EXIT_MESSAGE', correctResponse))
+      .getResponse();
+    }  else if((targetNum + 1) % 5 === 0){
+      correctResponse = 'buzz';
+      if(guessNum === 'buzz'){
+        responseNum = targetNum+2;
+        sessionAttributes.guessNumber = targetNum + 2; 
+        return handlerInput.responseBuilder
+        .speak(responseString)
+        .reprompt(responseString)
+        .getResponse();
+      }
+      sessionAttributes.gameState = 'ENDED';
+      attributesManager.setPersistentAttributes(sessionAttributes);
+      await attributesManager.savePersistentAttributes();
+      sessionAttributes.guessNumber = targetNum + 2; 
+      return handlerInput.responseBuilder
+      .speak(requestAttributes.t('EXIT_MESSAGE', correctResponse))
+      .reprompt(requestAttributes.t('EXIT_MESSAGE', correctResponse))
+      .getResponse();
+    } else if((targetNum + 1 )% 3 === 0){
       console.log(` GuessNum: ${guessNum}`);
       correctResponse ='fizz';
       if(guessNum === 'fizz'){
         sessionAttributes.guessNumber = targetNum + 2; 
         responseNum = targetNum + 2;
         return handlerInput.responseBuilder
-        .speak((responseNum).toString())
-        .reprompt((responseNum).toString())
+        .speak(responseString)
+        .reprompt(responseString)
         .getResponse();
       }
       sessionAttributes.gameState = 'ENDED';
@@ -216,43 +262,7 @@ const FizzIntent ={
       .speak(requestAttributes.t('EXIT_MESSAGE', correctResponse))
       .reprompt(requestAttributes.t('EXIT_MESSAGE', correctResponse))
       .getResponse();
-    } else if((targetNum + 1) % 5 === 0){
-      correctResponse = 'buzz';
-      if(guessNum === 'buzz'){
-        responseNum = targetNum+2;
-        sessionAttributes.guessNumber = targetNum + 2; 
-        return handlerInput.responseBuilder
-        .speak((responseNum).toString())
-        .reprompt((responseNum).toString())
-        .getResponse();
-      }
-      sessionAttributes.gameState = 'ENDED';
-      attributesManager.setPersistentAttributes(sessionAttributes);
-      await attributesManager.savePersistentAttributes();
-      sessionAttributes.guessNumber = targetNum + 2; 
-      return handlerInput.responseBuilder
-      .speak(requestAttributes.t('EXIT_MESSAGE', correctResponse))
-      .reprompt(requestAttributes.t('EXIT_MESSAGE', correctResponse))
-      .getResponse();
-    } else if((targetNum + 1) % 3 === 0 && (targetNum + 1) % 5 === 0){
-      correctResponse = 'fizz buzz';
-      if(guessNum ===  'fizz buzz'){
-        responseNum = targetNum + 2;
-        sessionAttributes.guessNumber = responseNum;
-        return handlerInput.responseBuilder
-        .speak((responseNum).toString())
-        .reprompt((responseNum).toString())
-        .getResponse();
-      }
-      sessionAttributes.gameState = 'ENDED';
-      attributesManager.setPersistentAttributes(sessionAttributes);
-      await attributesManager.savePersistentAttributes();
-      sessionAttributes.guessNumber = targetNum + 2; 
-      return handlerInput.responseBuilder
-      .speak(requestAttributes.t('EXIT_MESSAGE', correctResponse))
-      .reprompt(requestAttributes.t('EXIT_MESSAGE', correctResponse))
-      .getResponse();
-    } 
+    }
     sessionAttributes.gameState = 'ENDED';
     attributesManager.setPersistentAttributes(sessionAttributes);
     await attributesManager.savePersistentAttributes();
@@ -309,6 +319,7 @@ const NumberGuessIntent = {
         .reprompt(requestAttributes.t('EXIT_MESSAGE', responseString))
         .getResponse();
     }
+     
     
     if (guessNum ===  (targetNum + 1)) {
       sessionAttributes.guessNumber = (targetNum + 2) ; 
