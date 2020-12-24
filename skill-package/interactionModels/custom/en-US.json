@@ -1,0 +1,78 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "types": [
+        {
+          "name": "fizz",
+          "values": [
+            {
+              "id": "fizz",
+              "name": {
+                "value": "fizz",
+                "synonyms": [
+                  "buzz",
+                  "fizz buzz"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "intents": [
+        {
+          "name": "AMAZON.StopIntent"
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent"
+        },
+        {
+          "name": "AMAZON.HelpIntent"
+        },
+        {
+          "name": "AMAZON.CancelIntent"
+        },
+        {
+          "name": "AMAZON.YesIntent"
+        },
+        {
+          "name": "AMAZON.FallbackIntent"
+        },
+        {
+          "name": "AMAZON.NoIntent"
+        },
+        {
+          "name": "NumberGuessIntent",
+          "samples": [
+            "{number}",
+            "is it {number}",
+            "how about {number}",
+            "could be {number}"
+          ],
+          "slots": [
+            {
+              "name": "number",
+              "type": "AMAZON.NUMBER"
+            }
+          ]
+        },
+        {
+          "name": "FizzIntent",
+          "samples": [
+            "{fizz}",
+            "is it {fizz}",
+            "how about {fizz}",
+            "could be {fizz}"
+          ],
+          "slots": [
+            {
+              "name": "fizz",
+              "type": "fizz"
+            }
+          ]
+        }
+      ],
+      "invocationName": "fizzle buzz"
+    },
+    "prompts": []
+  }
+}

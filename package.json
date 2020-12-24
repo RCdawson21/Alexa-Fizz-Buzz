@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "ask-sdk": "^2.10.0",
+    "ask-sdk-core": "^2.10.1",
+    "ask-sdk-dynamodb-persistence-adapter": "^2.10.0",
+    "ask-sdk-s3-persistence-adapter": "^2.10.0",
+    "aws-sdk": "^2.815.0"
+  }
+}
