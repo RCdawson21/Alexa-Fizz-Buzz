@@ -174,14 +174,14 @@ const UnhandledIntent = {
     return true;
   },
   handle(handlerInput) {
+    const { attributesManager } = handlerInput
     const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
     const sessionAttributes = attributesManager.getSessionAttributes();
-    const { attributesManager } = handlerInput
     sessionAttributes.gameState = 'ENDED';
 
     return handlerInput.responseBuilder
-      .speak(requestAttributes.t('EXIT_MESSAGE'))
-      .reprompt(requestAttributes.t('EXIT_MESSAGE'))
+      .speak(requestAttributes.t('HELP_MESSAGE'))
+      .reprompt(requestAttributes.t('HELP_MESSAGE'))
       .getResponse();
   },
 };
