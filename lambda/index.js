@@ -219,15 +219,15 @@ const FallbackHandler = {
     if (sessionAttributes.gameState && sessionAttributes.gameState === 'STARTED') {
       // currently playing
       return handlerInput.responseBuilder
-        .speak(requestAttributes.t('FALLBACK_MESSAGE_DURING_GAME'))
-        .reprompt(requestAttributes.t('FALLBACK_REPROMPT_DURING_GAME'))
+        .speak(requestAttributes.t('HELP_MESSAGE_DURING_A_GAME'))
+        .reprompt(requestAttributes.t('HELP_MESSAGE_DURING_A_GAME'))
         .getResponse();
     }
 
     // not playing
     return handlerInput.responseBuilder
-      .speak(requestAttributes.t('FALLBACK_MESSAGE_OUTSIDE_GAME'))
-      .reprompt(requestAttributes.t('CONTINUE_MESSAGE'))
+      .speak(requestAttributes.t('HELP_MESSAGE'))
+      .reprompt(requestAttributes.t('HELP_MESSAGE'))
       .getResponse();
   },
 };
